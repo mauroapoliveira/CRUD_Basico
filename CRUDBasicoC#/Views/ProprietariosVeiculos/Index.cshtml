@@ -1,0 +1,36 @@
+﻿@model CRUDBasico.ViewModel.ProprietariosVeiculosViewModel
+<h2 class=" text-center">@ViewBag.Title</h2>
+<div class="text-center">
+    <h3 class="badge bg-secondary"> @ViewBag.Message @Model.Nome</h3>
+</div>
+<div class="row  text-center">
+    <label> Id do proprietário: @Model.Id</label> <br />
+</div>
+
+
+<table class="table table-success table-striped">
+    <tr>
+        <th> Marca/Fabricante</th>
+        <th>Modelo</th>
+        <th>Ano <br />Fabricação</th>
+        <th>Cor</th>
+        <th>Combustível</th>
+        <th>Automático</th>
+        <th>Valor</th>
+    </tr>
+    @foreach (var veiculo in Model.Veiculos)
+    {
+        <tr>
+            <td class="text-left">@veiculo.Marca</td>
+            <td class="text-left">@veiculo.Modelo</td>
+            <td>@veiculo.Fabricacao</td>
+            <td>@veiculo.Cor</td>
+            <td>@veiculo.Combustivel</td>
+            <td>@veiculo.Automatico</td>
+            <td>@veiculo.Valor</td>
+        </tr>
+    }
+</table>
+<br />
+<p><a class="btn btn-default" href="/Home/Veiculo">&#8630; Retornar Veículos</a></p>
+

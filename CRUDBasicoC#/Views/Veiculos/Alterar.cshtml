@@ -1,0 +1,68 @@
+﻿@*Injetar a classe*@
+@model CRUDBasico.Models.Veiculos
+@using CRUDBasico.Models
+
+
+<h2 class=" text-center">@ViewBag.Title.</h2>
+<h3 class=" text-center">@ViewBag.Message.</h3>
+
+@using (Html.BeginForm("Salvar", "Veiculos", FormMethod.Post))
+{
+    <div class="row col-md-offset-3">
+        <input type="hidden" id="id" name="id" value="@Model.Id" />
+        @Html.LabelFor(Model => Model.Nome, new { @class = "col-sm-2 col-form-label text-right" })
+
+        <div class="col-sm-4">
+            @Html.TextBoxFor(Model => Model.Nome, new { @class = "form-control", @Value = Model.Nome })
+            @Html.ValidationMessageFor(Model => Model.Nome, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row col-md-offset-3">
+        @Html.LabelFor(Model => Model.Modelo, new { @class = "col-sm-2 col-form-label text-right" })
+        <div class="col-sm-4">
+            @Html.TextBoxFor(Model => Model.Modelo, new { @class = "form-control", @Value = Model.Modelo })
+            @Html.ValidationMessageFor(Model => Model.Modelo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row col-md-offset-3">
+        @Html.LabelFor(Model => Model.Fabricacao, new { @class = "col-sm-2 col-form-label text-right" })
+        <div class="col-sm-4">
+            @Html.TextBoxFor(Model => Model.Fabricacao, new { @class = "form-control", @Value = Model.Fabricacao })
+            @Html.ValidationMessageFor(Model => Model.Fabricacao, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row col-md-offset-3">
+        @Html.LabelFor(Model => Model.Cor, new { @class = "col-sm-2 col-form-label text-right" })
+        <div class="col-sm-4">
+            @Html.TextBoxFor(Model => Model.Cor, new { @class = "form-control", @Value = Model.Cor })
+            @Html.ValidationMessageFor(Model => Model.Cor, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row col-md-offset-3">
+        @Html.LabelFor(Model => Model.Combustivel, new { @class = "col-sm-2 col-form-label text-right" })
+        <div class="col-sm-4">
+            @Html.DropDownListFor(Model => Model.Combustivel, EnumCombustivel.Diesel.ToSelectList((int)Model.Combustivel), "Selecione um tio de combustível", new { @class = "form-control" })
+            @Html.ValidationMessageFor(Model => Model.Combustivel, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row col-md-offset-3">        
+
+        @Html.LabelFor(Model => Model.Automatico, new { @class = "col-sm-2 col-form-label text-right" })
+        <div class="col-sm-4">
+            @Html.DropDownListFor(Model => Model.Automatico, EnumSimNao.Não.ToSelectList((int)Model.Automatico), "Selecione um sim/nao", new { @class = "form-control" })
+            @Html.ValidationMessageFor(Model => Model.Automatico, "", new { @class = "text-danger" })
+        </div>
+
+    </div>
+    <div class="row col-md-offset-3">
+        @Html.LabelFor(Model => Model.Valor, new { @class = "col-sm-2 col-form-label text-right" })
+        <div class="col-sm-4">
+            @Html.TextBoxFor(Model => Model.Valor, new { @class = "form-control", @Value = Model.Valor.ToString("#0.00") })
+            @Html.ValidationMessageFor(Model => Model.Valor, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+    <div class="button  text-center">
+        <button type="submit" class="btn btn-primary">Gravar/Alterar</button>
+    </div>
+}

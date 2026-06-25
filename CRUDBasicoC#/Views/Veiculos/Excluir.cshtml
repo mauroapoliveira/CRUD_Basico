@@ -1,0 +1,57 @@
+﻿@{
+    var veiculo = ViewBag.veiculo;
+}
+<h2 class=" text-center">@ViewBag.Title.</h2>
+<h3 class=" text-center badge bg-secundary">@ViewBag.Message.</h3>
+
+<form action="/veiculos/Excluir" method="post">
+    <div class="row col-md-offset-3">
+        <input type="hidden" id="id" name="id" value="@veiculo.Id" />
+        <label for="nome" class="col-sm-2 col-form-label text-right">Marca:</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="nome" name="nome" readonly value="@veiculo.Nome" />
+        </div>
+    </div>
+    <div class="row col-md-offset-3">
+        <label for="modelo" class="col-sm-2 col-form-label text-right">Modelo:</label>
+        <div class="col-sm-4">
+            <input type="text"  class="form-control" id="modelo" name="modelo" readonly value="@veiculo.Modelo" />
+        </div>
+    </div>
+    <div class="row col-md-offset-3">
+        <label for="fabricacao" class="col-sm-2 col-form-label text-right">Ano:</label>
+        <div class="col-sm-4">
+            <input type="text"  class="form-control" id="fabricacao" name="fabricacao" readonly value="@veiculo.Fabricacao" />
+        </div>
+    </div>
+    <div class="row col-md-offset-3">
+        <label for="cor" class="col-sm-2 col-form-label text-right">Cor:</label>
+        <div class="col-sm-4">
+            <input type="text"  class="form-control" id="cor" name="cor" readonly value="@veiculo.Cor" />
+        </div>
+    </div>
+    <div class="row col-md-offset-3">
+        <label for="combustivel" class="col-sm-2 col-form-label text-right">Combustivel:</label>
+        <div class="col-sm-4">
+            <input type="text"  class="form-control" id="combustivel" name="combustivel" readonly value="@veiculo.Combustivel" />
+        </div>
+    </div>
+    <div class="row col-md-offset-3">
+        <label for="automatico" class="col-sm-2 col-form-label text-right">Automatico:</label>
+        <div class="col-sm-4">
+         
+            <input type="text" class="form-control" id="combustivel" name="combustivel" readonly value="@veiculo.Automatico" />
+       
+        </div>
+    </div>
+    <div class="row col-md-offset-3">
+        <label for="valor" class="col-sm-2 col-form-label text-right">Valor:</label>
+        <div class="col-sm-4">
+            <input type="text"  class="form-control" id="valor" name="valor" readonly value="@veiculo.Valor" />
+        </div>
+    </div>
+    <br /><br />
+    <div class="button">
+        <button type="submit">Excluir</button>
+    </div>
+</form>
