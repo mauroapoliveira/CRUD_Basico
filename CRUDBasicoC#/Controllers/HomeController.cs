@@ -11,15 +11,13 @@ namespace CRUDBasico.Controllers
     {
         public ActionResult Index()
         {
-            if (Session["Autorizado"] != null)
+            HttpCookie cookie = Request.Cookies["AgenciaAuto"];
+            if (cookie != null)
             {
                 return View();
             }
             else
             {
-                //possivel trocar essas duas linhas pela seguinte de baixo
-                //Response.Redirect("/Login/Index");
-                //return null;
                 return RedirectToAction("Index", "Login");
             }
         }
@@ -28,7 +26,8 @@ namespace CRUDBasico.Controllers
          {
             ViewBag.Title = "Página Consulta Veiculo";
             ViewBag.Message = "Lista de Veiculos";
-            if(Session["Autorizado"]!=null)
+            HttpCookie cookie = Request.Cookies["AgenciaAuto"];
+            if (cookie != null)
             {
                 var lista = Veiculos.Get_Carros();
                 ViewBag.Lista = lista;
@@ -45,7 +44,8 @@ namespace CRUDBasico.Controllers
 
         public ActionResult Contact()
         {
-            if (Session["Autorizado"] != null)
+            HttpCookie cookie = Request.Cookies["AgenciaAuto"];
+            if (cookie != null)
             {
                 ViewBag.Message = "Your contact page.";
                 return View();

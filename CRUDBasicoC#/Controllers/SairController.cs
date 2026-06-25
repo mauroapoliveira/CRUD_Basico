@@ -12,6 +12,7 @@ namespace CRUDBasico.Controllers
         public ActionResult Index()
         {
             Session.Abandon();
+            Response.Cookies["AgenciaAuto"].Expires = DateTime.Now.AddDays(-1);
             return RedirectToAction("Index", "Login");
         }
     }

@@ -24,11 +24,19 @@
                     <li>@Html.ActionLink("testee", "Index", "Home")</li>
                     <li>@Html.ActionLink("Veiculos", "Veiculo", "Home")</li>
                     <li>@Html.ActionLink("Contato", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Sair", "Index", "Sair")</li>
+                    @{
+                        HttpCookie cookie = Request.Cookies["AgenciaAuto"];
+                        if (cookie != null)
+                        {
+                            <li>@Html.ActionLink("Sair", "Index", "Sair")</li>
+                            <li>@Html.ActionLink(cookie["nomeusuario"], "", "")</li>
+                        }
+                    }
                 </ul>
             </div>
         </div>
     </div>
+    
     <div class="container body-content">
         @RenderBody()
         <hr />

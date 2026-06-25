@@ -12,27 +12,54 @@ namespace CRUDBasico.Controllers
         // GET: Veiculos
         public ActionResult Adicionar()
         {
-            ViewBag.Title = "Adicionar veiculo";
-            ViewBag.Message = "veiculo";
-            return View();
+            HttpCookie cookie = Request.Cookies["AgenciaAuto"];
+            if (cookie != null)
+            {
+                ViewBag.Title = "Adicionar veiculo";
+                ViewBag.Message = "veiculo";
+                return View();
+            }
+            else
+            {
+                Response.Redirect("/Login/Index");
+                return null;
+            }
         }
         public ActionResult Alterar(int id)
         {
-            ViewBag.Title = "Veiculo";
-            ViewBag.Message = "Alterar veiculo";
-            var veiculo = new Veiculos();
-            veiculo.GetVeiculo(id);
-            return View(veiculo);
+            HttpCookie cookie = Request.Cookies["AgenciaAuto"];
+            if (cookie != null)
+            {
+                ViewBag.Title = "Veiculo";
+                ViewBag.Message = "Alterar veiculo";
+                var veiculo = new Veiculos();
+                veiculo.GetVeiculo(id);
+                return View(veiculo);
+            }
+            else
+            {
+                Response.Redirect("/Login/Index");
+                return null;
+            }
         }
 
         public ActionResult Excluir(int id)
         {
-            ViewBag.Title = "Exclusão de veiculo";
-            ViewBag.Message = "";
-            var veiculo = new Veiculos();
-            veiculo.GetVeiculo(id);
-            ViewBag.Veiculo = veiculo;
-            return View();
+            HttpCookie cookie = Request.Cookies["AgenciaAuto"];
+            if (cookie != null)
+            {
+                ViewBag.Title = "Exclusão de veiculo";
+                ViewBag.Message = "";
+                var veiculo = new Veiculos();
+                veiculo.GetVeiculo(id);
+                ViewBag.Veiculo = veiculo;
+                return View();
+            }
+            else
+            {
+                Response.Redirect("/Login/Index");
+                return null;
+            }
         }
 
         [HttpPost]
@@ -65,12 +92,18 @@ namespace CRUDBasico.Controllers
         [HttpPost]
         public void Excluir()
         {
-            var veiculo = new Veiculos();
-            veiculo.Id = Convert.ToInt32("0" + Request["id"]);
-            veiculo.Excluir();
+            HttpCookie cookie = Request.Cookies["AgenciaAuto"];
+            if (cookie != null)
+            {
+                var veiculo = new Veiculos();
+                veiculo.Id = Convert.ToInt32("0" + Request["id"]);
+                veiculo.Excluir();
+            }
+            else
+            {
+                Response.Redirect("/Home/Veiculo");
+            }
 
-            
-            Response.Redirect("/Home/Veiculo");
         }
     }
 }
