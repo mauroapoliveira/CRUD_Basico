@@ -49,9 +49,15 @@ namespace CRUDBasico.Models
 
         public Proprietarios Proprietario { get; set; }
 
+        public Imagem Imagem { get; set; }
+
         [Display(Name = "Ativo:")]
         public bool Ativo { get; set; }
-        public Veiculos() { }
+        public Veiculos() 
+        {
+            var imagem = new Imagem();
+            Imagem = imagem;
+        }
         public Veiculos(int id, string nome, string modelo, short ano, short fabricacao, string cor, EnumCombustivel combustivel, EnumSimNao automatico, decimal valor, int idProprietario, string nomeProprietario, bool ativo)
         {
             Id = id;
@@ -69,6 +75,9 @@ namespace CRUDBasico.Models
             proprietario.Id = idProprietario;
             proprietario.Nome = nomeProprietario;
             this.Proprietario = proprietario;
+
+            var imagem = new Imagem();
+            Imagem = imagem;
         }
 
         public static List<Veiculos> Get_Carros()
@@ -124,14 +133,14 @@ namespace CRUDBasico.Models
             var sql = "";
             if (Id == 0)
                 sql = "Insert Into tb_veiculos(Nome, Modelo, Ano, Fabricacao, Cor, " +
-                    "Combustivel, Automatico, Valor, Ativo) " +
+                    "Combustivel, Automatico, Valor, Ativo, Imagem) " +
                     "Values(@nome, @modelo, @ano, @fabricacao, @cor, " +
-                    "@combustivel, @automatico, @valor, @ativo)";
+                    "@combustivel, @automatico, @valor, @ativo, @imagem)";
             else
                 sql = "Update tb_veiculos set nome = @nome, modelo = @modelo, " +
                     "ano = @ano, fabricacao = @fabricacao, cor = @cor, " +
                     "combustivel = @combustivel, automatico = @automatico, " +
-                    "valor = @valor, ativo = @ativo Where id = " + Id;
+                    "valor = @valor, ativo = @ativo, imagem = @imagem Where id = @id";
             try
             {
                 using (var cn = new SqlConnection(_conn))
@@ -139,7 +148,11 @@ namespace CRUDBasico.Models
                     cn.Open();
                     using (var cmd = new SqlCommand(sql, cn))
                     {
-                        
+                        //upload da foto (imagem)
+                        Imagem.Salvar(Imagem);
+                        if(Id>0)
+                            cmd.Parameters.AddWithValue("@id", Id);
+
                         cmd.Parameters.AddWithValue("@nome", Nome);
                         cmd.Parameters.AddWithValue("@modelo", Modelo);
                         cmd.Parameters.AddWithValue("@ano", Fabricacao);
@@ -149,6 +162,7 @@ namespace CRUDBasico.Models
                         cmd.Parameters.AddWithValue("@automatico", Automatico);
                         cmd.Parameters.AddWithValue("@valor", Valor);
                         cmd.Parameters.AddWithValue("@ativo", Ativo);
+                        cmd.Parameters.AddWithValue("@imagem", Imagem.NomeArquivo);
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -165,7 +179,7 @@ namespace CRUDBasico.Models
         public void GetVeiculo(int id)
         {
             var sql = "Select nome, modelo, ano, fabricacao, cor, combustivel, automatico, " +
-                "valor, ativo from tb_Veiculos where id = " + id;
+                "valor, ativo, imagem from tb_Veiculos where id = " + id;
             try
             {
                 using (var cn = new SqlConnection(_conn))
@@ -189,6 +203,7 @@ namespace CRUDBasico.Models
                                     Automatico = (EnumSimNao)Convert.ToByte(dr["automatico"]);
                                     Valor = Convert.ToDecimal(dr["valor"]);
                                     Ativo = Convert.ToBoolean(dr["ativo"]);
+                                    Imagem.NomeArquivo = dr["imagem"].ToString();
                                 }
                             }
                         }

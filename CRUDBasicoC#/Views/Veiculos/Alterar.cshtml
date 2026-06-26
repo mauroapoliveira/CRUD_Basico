@@ -6,7 +6,7 @@
 <h2 class=" text-center">@ViewBag.Title.</h2>
 <h3 class=" text-center">@ViewBag.Message.</h3>
 
-@using (Html.BeginForm("Salvar", "Veiculos", FormMethod.Post))
+@using (Html.BeginForm("Salvar", "Veiculos", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="row col-md-offset-3">
         <input type="hidden" id="id" name="id" value="@Model.Id" />
@@ -45,7 +45,7 @@
             @Html.ValidationMessageFor(Model => Model.Combustivel, "", new { @class = "text-danger" })
         </div>
     </div>
-    <div class="row col-md-offset-3">        
+    <div class="row col-md-offset-3">
 
         @Html.LabelFor(Model => Model.Automatico, new { @class = "col-sm-2 col-form-label text-right" })
         <div class="col-sm-4">
@@ -61,6 +61,27 @@
             @Html.ValidationMessageFor(Model => Model.Valor, "", new { @class = "text-danger" })
         </div>
     </div>
+    <br />
+
+    <div class="row col-md-offset-3">
+        <div class="col-sm-8">
+            <figure>
+                <img src="/@Html.DisplayFor(Model => Model.Imagem.NomeArquivo)" id="img" width="250" alt="@Html.DisplayFor(Model => Model.Imagem.NomeArquivo)" />
+                <figcaption id="figcaption">
+                </figcaption>
+            </figure>
+        </div>
+    </div>
+    <br />
+
+    <div class="row col-md-offset-4">
+        @Html.LabelFor(Model => Model.Imagem.ImageFile, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(Model => Model.Imagem.ImageFile, new { type = "file", @class = "btn btn-primary", accept = "image/png, image/jpeg" })
+            @Html.ValidationMessageFor(Model => Model.Imagem.ImageFile, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
     <br />
     <div class="button  text-center">
         <button type="submit" class="btn btn-primary">Gravar/Alterar</button>

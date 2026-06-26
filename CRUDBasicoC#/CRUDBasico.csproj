@@ -130,6 +130,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ExtensionMethods.cs" />
+    <Compile Include="Models\Imagem.cs" />
     <Compile Include="Models\Proprietarios.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\Veiculos.cs" />
@@ -181,6 +182,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Imagem\" />
     <Folder Include="Views\Sair\" />
   </ItemGroup>
   <ItemGroup>
