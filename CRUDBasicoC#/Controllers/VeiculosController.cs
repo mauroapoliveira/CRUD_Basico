@@ -49,7 +49,7 @@ namespace CRUDBasico.Controllers
             if (cookie != null)
             {
                 ViewBag.Title = "Exclusão de veiculo";
-                ViewBag.Message = "";
+                ViewBag.Message = "Página Exclusão";
                 var veiculo = new Veiculos();
                 veiculo.GetVeiculo(id);
                 ViewBag.Veiculo = veiculo;
@@ -101,8 +101,9 @@ namespace CRUDBasico.Controllers
             }
             else
             {
-                Response.Redirect("/Home/Veiculo");
+                
             }
+            Response.Redirect("/Home/Veiculo");
 
         }
     }

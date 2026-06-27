@@ -73,17 +73,26 @@
         </div>
     </div>
     <br />
-
     <div class="row col-md-offset-4">
         @Html.LabelFor(Model => Model.Imagem.ImageFile, new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.TextBoxFor(Model => Model.Imagem.ImageFile, new { type = "file", @class = "btn btn-primary", accept = "image/png, image/jpeg" })
-            @Html.ValidationMessageFor(Model => Model.Imagem.ImageFile, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(Model => Model.Imagem.ImageFile, new
+       {
+           type = "file",
+           @class = "btn btn-primary",
+           accept = "image/png, image/jpeg",
+           id = "NomeArquivo" // ID explícito para o JavaScript
+       })
+            @Html.ValidationMessageFor(Model => Model.Imagem.ImageFile, "", new
+            {
+                @class = "text-danger"
+            })
         </div>
+
     </div>
-    <br />
     <br />
     <div class="button  text-center">
         <button type="submit" class="btn btn-primary">Gravar/Alterar</button>
     </div>
 }
+<script src="~/Scripts/NovosScripts/JavaScript.js"></script>
